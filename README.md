@@ -1,10 +1,3 @@
-# DistributedSystemsProject2
-
-docker run --name mysqldb -v mysqldbvol:/var/lib/mysql -p 3306:3306 -e MYSQL_USER=project2 -e MYSQL_PASSWORD=2000 -e MYSQL_DATABASE=user -e MYSQL_ROOT_PASSWORD=pass123 --rm -d mysql/mysql-server:latest
-2d9c0ce200c60ca12845597dd1851401e5dcc5ab064cf6c4a7636ed7661eb81d
-
-docker stop
-
 DROP TABLE IF EXISTS `user_information`;
 
 CREATE TABLE user_information (
@@ -16,7 +9,7 @@ CREATE TABLE user_information (
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-INSERT INTO UserInformation (username , first_name , last_name , email)
+INSERT INTO user_information (username , first_name , last_name , email)
 VALUES ('Cardinal', 'Tom', 'Erichsen', 'love@hotmail.com');
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -43,3 +36,22 @@ INSERT INTO `user` (`username`, `password`, `enabled`) VALUES
 INSERT INTO `authorities` (`username`, `authority`) VALUES
    ('root', 'ROLE_ADMIN'),
    ('elpida', 'ROLE_USER');
+   
+ CREATE TABLE IF NOT EXISTS `application` (
+ `id_ap` int(11) NOT NULL AUTO_INCREMENT,
+ `id` int(11) NOT NULL,
+ `undergraduate_studies` varchar(100) NOT NULL,
+ `grade` int(2) NOT NULL,
+ `professor1` varchar(100) NOT NULL,
+ `professor2` varchar(100) NOT NULL,
+ `approval` varchar(10) NOT NULL,
+ `order_number` int(11) NOT NULL,
+ PRIMARY KEY (`id_ap`),
+ CONSTRAINT `fk_application_id` FOREIGN KEY (`id`) REFERENCES `user_information` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `application`;
+
+INSERT INTO application (id, undergraduate_studies, grade , professor1, professor2, approval, order_number)
+VALUES ('1', 'Informatics and Telematics', '7', 'Tom Smith', 'George Walker', 'yes', '1');
+
