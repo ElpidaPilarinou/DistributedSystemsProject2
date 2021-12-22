@@ -1,9 +1,7 @@
 package gr.hua.ds.springboot2.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user_information")
@@ -24,6 +22,10 @@ public class UserInformation {
 
     @Column(name = "email")
     private String email;
+
+    @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name="id")
+    private List<Application> application;
 
     public UserInformation() {
     }
@@ -75,6 +77,14 @@ public class UserInformation {
         this.email = email;
     }
 
+    public List<Application> getApplication() {
+        return application;
+    }
+
+    public void setApplication(List<Application> application) {
+        this.application = application;
+    }
+
     @Override
     public String toString() {
         return "UserInformation{" +
@@ -83,6 +93,7 @@ public class UserInformation {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", application=" + application +
                 '}';
     }
 }
