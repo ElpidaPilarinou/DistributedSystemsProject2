@@ -8,6 +8,9 @@ public class Application {
     @Column(name = "id_ap")
     private int idAp;
 
+    @Column(name = "id")
+    private int id;
+
     @Column(name = "undergraduate_studies")
     private String undergraduateStudies;
 
@@ -26,17 +29,18 @@ public class Application {
     @Column(name = "order_number")
     private int orderNumber;
 
+
     public Application() {
     }
 
-    public Application(String undergraduateStudies, int grade, String professor1, String professor2, String approval, int orderNumber) {
+    public Application(int id, String undergraduateStudies, int grade, String professor1, String professor2, String approval, int orderNumber) {
+        this.id = id;
         this.undergraduateStudies = undergraduateStudies;
         this.grade = grade;
         this.professor1 = professor1;
         this.professor2 = professor2;
         this.approval = approval;
         this.orderNumber = orderNumber;
-
     }
 
     public int getIdAp() {
@@ -45,6 +49,14 @@ public class Application {
 
     public void setIdAp(int idAp) {
         this.idAp = idAp;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUndergraduateStudies() {
@@ -99,6 +111,7 @@ public class Application {
     public String toString() {
         return "Application{" +
                 "idAp=" + idAp +
+                ", id=" + id +
                 ", undergraduateStudies='" + undergraduateStudies + '\'' +
                 ", grade=" + grade +
                 ", professor1='" + professor1 + '\'' +
